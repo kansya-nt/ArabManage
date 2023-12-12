@@ -17,18 +17,18 @@ async def ban_zombies(_, message: Message):
     except:
         clean = None
     if clean != "clean":
-        check = await message.reply_text("`Searching for deleted accounts...`")
+        check = await message.reply_text("`Mencari akun yang dihapus...`")
         async for user in pbot.get_chat_members(message.chat.id):
             if user.user.is_deleted:
                 del_zom += 1
                 await sleep(1)
         if del_zom > 0:
             return await check.edit_text(
-                f"`{del_zom}` found in this chat.\nClean them by /zombies clean"
+                f"`{del_zom}` ditemukan dalam obrolan ini.\nBersihkan dengan /zombies clean"
             )
         else:
             return await check.edit_text(no_z)
-    cleaner = await message.reply_text("`Cleaning deleted accounts from this chat...`")
+    cleaner = await message.reply_text("`Membersihkan akun yang dihapus dari obrolan ini...`")
     deleted_u = []
     banned = 0
     failed = 0
@@ -44,17 +44,17 @@ async def ban_zombies(_, message: Message):
                 continue
                 failed += 1
         return await cleaner.edit_text(
-            f"Cleaned `{banned}` zombies from this chat.\nFailed to remove `{failed}` admin zombies."
+            f"Dibersihkan `{banned}` zombie dari obrolan ini.\nGagal menghapus `{failed}` admin zombie."
         )
     else:
         return await check.edit_text(no_z)
 
 
 __help__ = """
-*Remove Deleted Accounts*
+*Hapus Akun yang Dihapus*
 
- ❍ /zombies *:* Starts searching for deleted accounts in the group.
- ❍ /zombies clean *:* Removes the deleted accounts from the group.
+ ❍ /zombies *:* Mulai mencari akun yang dihapus di grup.
+ ❍ /zombies clean *:* Menghapus akun yang dihapus dari grup.
 """
 
-__mod_name__ = "Zᴏᴍʙɪᴇ"
+__mod_name__ = "Zombies"
