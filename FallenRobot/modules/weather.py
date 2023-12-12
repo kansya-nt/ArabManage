@@ -34,10 +34,10 @@ async def _(event):
 
 
 __help__ = """
-I can find weather of all cities
+Saya dapat menemukan cuaca di semua kota
 
-❍ /weather <city>*:* Advanced weather module, usage same as /weather
- ❍ /weather moon*:* Get the current status of moon
+❍ /weather <city>*:* Modul cuaca tingkat lanjut, penggunaannya sama dengan /weather
+❍ /weather moon*:* Dapatkan status bulan saat ini
 """
 
-__mod_name__ = "Wᴇᴀᴛʜᴇʀ"
+__mod_name__ = "Weather"
