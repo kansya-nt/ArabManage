@@ -409,7 +409,7 @@ def Fallen_about_callback(update: Update, context: CallbackContext):
                         ),
                         InlineKeyboardButton(
                             text="sᴛᴏʀᴇ",
-                            url="https://t.me/Arabc0de",
+                            url=f"https://t.me/Arabc0de",
                         ),
                     ],
                     [
@@ -443,8 +443,8 @@ Haiii,
             reply_markup=InlineKeyboardMarkup(
                 [[InlineKeyboardButton(text="Ubot Premium", callback_data="Ubot_")]]
                 [
-                    [InlineKeyboardButton(text="Jasa Deploy Bot", url=f"https://t.me/Arabc0de")]
-                    [InlineKeyboardButton(text="Jasa Telegram", url=f"https://t.me/Arabc0de")]
+                    InlineKeyboardButton(text="Jasa Deploy Bot", url=f"https://t.me/Arabc0de/60"),
+                    InlineKeyboardButton(text="Jasa Telegram", url=f"https://t.me/Arabc0de/67")
                 ]
                 [[InlineKeyboardButton(text="Kembali", callback_data="source_back")]]
             ),
@@ -462,10 +462,10 @@ Dan Ubot Premium Support Segala Macam Emoji Premium di Dalam Modulnya
 parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="Dhil Arab", url="https://t.me/Dhilnihnge")]]
+                [[InlineKeyboardButton(text="Dhil Arab", url=f"https://t.me/Dhilnihnge")]]
                 [
-                    [InlineKeyboardButton(text="Arab Ubot Ultra", url="https://t.me/ArabUltraUbot")]
-                    [InlineKeyboardButton(text="Arab Spesial Ubot", url="https://t.me/Spesial01Ubot")]
+                    InlineKeyboardButton(text="Arab Ubot Ultra", url=f"https://t.me/ArabUltraUbot"),
+                    InlineKeyboardButton(text="Arab Spesial Ubot", url=f"https://t.me/Spesial01Ubot")
                 ]
                 [[InlineKeyboardButton(text="Kembali", callback_data="fallen_back")]]
             ),
