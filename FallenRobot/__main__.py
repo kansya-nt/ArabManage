@@ -90,15 +90,15 @@ buttons = [
         ),
     ],
     [
-        InlineKeyboardButton(text="ʜᴇʟᴩ & ᴄᴏᴍᴍᴀɴᴅs", callback_data="help_back"),
+        InlineKeyboardButton(text="Help & Commands", callback_data="help_back"),
     ],
     [
-        InlineKeyboardButton(text="ᴀʙᴏᴜᴛ", callback_data="fallen_"),
-        InlineKeyboardButton(text="sᴜᴩᴩᴏʀᴛ", url=f"https://t.me/{SUPPORT_CHAT}"),
+        InlineKeyboardButton(text="About", callback_data="fallen_"),
+        InlineKeyboardButton(text="Support", url=f"https://t.me/{SUPPORT_CHAT}"),
     ],
     [
-        InlineKeyboardButton(text=" ᴅᴇᴠ", url=f"tg://user?id={OWNER_ID}"),
-        InlineKeyboardButton(text="sᴏᴜʀᴄᴇ", callback_data="source_"),
+        InlineKeyboardButton(text=" Dev", url=f"tg://user?id={OWNER_ID}"),
+        InlineKeyboardButton(text="Jasa Bot", callback_data="source_"),
     ],
 ]
 
