@@ -73,10 +73,10 @@ def get(update, context, notename, show_none=True, no_format=False):
                         chat_id=chat_id, from_chat_id=JOIN_LOGGER, message_id=note.value
                     )
                 except BadRequest as excp:
-                    if excp.message == "Message to forward not found":
+                    if excp.message == "Pesan yg lu terusin ga ada":
                         message.reply_text(
-                            "This message seems to have been lost - I'll remove it "
-                            "from your notes list."
+                            "Pesan ini sepertinya telah hilang - saya akan menghapusnya"
+                            "dari daftar catatan Anda."
                         )
                         sql.rm_note(chat_id, notename)
                     else:
@@ -488,24 +488,24 @@ def __chat_settings__(chat_id, user_id):
 
 __help__ = """
 
- ❍ `/get <notename>`*:* get the note with this notename
- ❍ `#<notename>`*:* same as /get
- ❍ `/notes` or `/saved`*:* list all saved notes in this chat
- ❍ `/number` *:* Will pull the note of that number in the list. 
-If you would like to retrieve the contents of a note without any formatting, use `/get <notename> noformat`. This can \
-be useful when updating a current note.
+ ✜ `/get <notename>`*:* dapatkan catatan dengan nama catatan ini
+ ✜ `#<notename>`*:* same as /get
+ ✜ `/notes` or `/saved`*:* daftar semua catatan yang disimpan dalam obrolan ini
+ ✜ `/number` *:* Akan menarik catatan nomor itu dalam daftar.
+Jika Anda ingin mengambil isi catatan tanpa format apa pun, gunakan `/get <namacatatan> noformat`. Ini bisa \
+berguna saat memperbarui catatan saat ini.
 
 *Admins only:*
- ❍ `/save <notename> <notedata>`*:* saves notedata as a note with name notename
-A button can be added to a note by using standard markdown link syntax - the link should just be prepended with a \
-`buttonurl:` section, as such: `[somelink](buttonurl:example.com)`. Check `/markdownhelp` for more info.
- ❍ `/save <notename>`*:* save the replied message as a note with name notename
- ❍ `/clear <notename>`*:* clear note with this name
- ❍ `/removeallnotes`*:* removes all notes from the group
- *Note:* Note names are case-insensitive, and they are automatically converted to lowercase before getting saved.
+ ✜ `/save <notename> <notedata>`*:* menyimpan notedata sebagai catatan dengan nama notename
+Sebuah tombol dapat ditambahkan ke catatan dengan menggunakan sintaks tautan penurunan harga standar - tautan tersebut sebaiknya diawali dengan \
+bagian `buttonurl:`, seperti: `[somelink](buttonurl:example.com)`. Periksa `/markdownhelp` untuk info lebih lanjut.
+ ✜ `/save <notename>`*:* simpan pesan yang dibalas sebagai catatan dengan nama notename
+ ✜ `/clear <notename>`*:* catatan yang jelas dengan nama ini
+ ✜ `/removeallnotes`*:* menghapus semua catatan dari grup
+ *Catatan:* Nama catatan tidak peka huruf besar-kecil, dan secara otomatis diubah menjadi huruf kecil sebelum disimpan.
 """
 
-__mod_name__ = "Nᴏᴛᴇs"
+__mod_name__ = "Notes"
 
 GET_HANDLER = CommandHandler("get", cmd_get, run_async=True)
 HASH_GET_HANDLER = MessageHandler(Filters.regex(r"^#[^\s]+"), hash_get, run_async=True)
