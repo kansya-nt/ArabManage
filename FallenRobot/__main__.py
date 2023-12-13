@@ -443,7 +443,7 @@ Haiii,
             reply_markup=InlineKeyboardMarkup(
                 [[InlineKeyboardButton(text="Ubot Premium", callback_data="Ubot_")]]
                 [
-                    [InlineKeyboardButton(text="Jasa Deploy Bot", callback_data="Perabot_")]
+                    [InlineKeyboardButton(text="Jasa Deploy Bot", url="https://t.me/Arabc0de")]
                     [InlineKeyboardButton(text="Jasa Telegram", url="https://t.me/Arabc0de")]
                 ]
                 [[InlineKeyboardButton(text="Kembali", callback_data="source_back")]]
@@ -470,55 +470,6 @@ parse_mode=ParseMode.MARKDOWN,
                 [[InlineKeyboardButton(text="Kembali", callback_data="source_back")]]
             ),
         )
-
-    
-def Bot_Tele_callback(update: Update, context: CallbackContext):
-    query = update.callback_query
-     if query.data == "Perabot_":
-        query.message.edit_text(
-            text=f""" 
-<b>Jasa Deploy Bot Telegram :</b>
-
-• Bot Menfes -> 90k/bulan (support ava Sugdad, Talent dll )
-• Fsub/File Share/Bot Asupan -> Rp.30k/bulan(Nambah Button 10k)
-• Bot Musik Ram 4GB -> 100k/bulan
-• Bot Musik Ram 8GB -> 180k/bulan
-• Bot Manage Seperti Robot Ini -> 90k/bulan
-
-<b>Info Selengkapnya Bisa Contact Saya.</b>
-""",
-parse_mode=ParseMode.MARKDOWN,
-            disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="Dhil Arab", url="https://t.me/Dhilnihnge")]]
-                [
-                    [InlineKeyboardButton(text="Store", url="https://t.me/Arabc0de")]
-                    [InlineKeyboardButton(text="Ubot Prem", callback_data="Ubot_")]
-                ]
-                [[InlineKeyboardButton(text="Kembali", callback_data="source_back")]]
-            ),
-        )
- elif query.data == "Ubot_":
-        query.message.edit_text(
-            text=f"""
-Haii, 
-UBot Premium adalah Userbot dengan fitur yang di sesuaikan dan di permudah untuk masalah deployment.
-Dan Ubot Premium Support Segala Macam Emoji Premium di Dalam Modulnya
-
-• Bot Premium -> Rp.30k/bulan
-""",
-parse_mode=ParseMode.MARKDOWN,
-            disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="Dhil Arab", url="https://t.me/Dhilnihnge")]]
-                [
-                    [InlineKeyboardButton(text="Arab Ubot Ultra", url="https://t.me/ArabUltraUbot")]
-                    [InlineKeyboardButton(text="Arab Spesial Ubot", url="https://t.me/Spesial01Ubot")]
-                ]
-                [[InlineKeyboardButton(text="Kembali", callback_data="source_back")]]
-            ),
-        )
-
         
         elif query.data == "source_back":
         first_name = update.effective_user.first_name
