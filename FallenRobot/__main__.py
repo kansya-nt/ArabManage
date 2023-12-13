@@ -443,8 +443,8 @@ Haiii,
             reply_markup=InlineKeyboardMarkup(
                 [[InlineKeyboardButton(text="Ubot Premium", callback_data="Ubot_")]]
                 [
-                    [InlineKeyboardButton(text="Jasa Deploy Bot", url="https://t.me/Arabc0de")]
-                    [InlineKeyboardButton(text="Jasa Telegram", url="https://t.me/Arabc0de")]
+                    [InlineKeyboardButton(text="Jasa Deploy Bot", url=f"https://t.me/Arabc0de")]
+                    [InlineKeyboardButton(text="Jasa Telegram", url=f"https://t.me/Arabc0de")]
                 ]
                 [[InlineKeyboardButton(text="Kembali", callback_data="source_back")]]
             ),
