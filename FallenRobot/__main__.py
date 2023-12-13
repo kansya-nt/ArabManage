@@ -44,7 +44,7 @@ from FallenRobot import (
 from FallenRobot.modules import ALL_MODULES
 from FallenRobot.modules.helper_funcs.chat_status import is_user_admin
 from FallenRobot.modules.helper_funcs.misc import paginate_modules
-
+from ArabStore.UbotPrem.py import UbotPrem
 
 def get_readable_time(seconds: int) -> str:
     count = 0
@@ -72,7 +72,7 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-*ʏᴏᴏ {}* [🤖](https://telegra.ph//file/9f36a09b71e94bc7676e0.jpg)
+*ʏᴏᴏ {}* [🤖](https://telegra.ph//file/3900ea5b3385ac7632dac.jpg)
 
 sᴀʏᴀ {} ʙᴏᴛ ᴍᴜsɪᴄ ᴘʟᴜs ᴍᴀɴᴀɢᴇ ʙᴏᴛ
 ɢᴀ ᴀᴅᴀ ʏᴀɴɢ sᴘᴇsɪᴀʟ sᴀᴍᴀ ᴀᴊᴀ ᴋᴇᴋ ʙᴏᴛ ᴍᴜsɪᴄ ʟᴀᴇɴ, ᴋᴀʟᴏ ᴍᴀᴜ ᴅᴏɴᴀsɪ ᴊᴀɴɢᴀɴ ʟᴜᴘᴀ ᴋʟɪᴋ /donate ᴏᴛᴇʏ
@@ -348,7 +348,7 @@ def Fallen_about_callback(update: Update, context: CallbackContext):
     if query.data == "fallen_":
         uptime = get_readable_time((time.time() - StartTime))
         query.message.edit_text(
-            text=f"*ʏᴏᴏ,[🤖](https://telegra.ph//file/9f36a09b71e94bc7676e0.jpg)\n  *ᴛʜɪs ɪs {BOT_NAME}*" 
+            text=f"*ʏᴏᴏ,[🤖](https://telegra.ph//file/3900ea5b3385ac7632dac.jpg)\n  *ᴛʜɪs ɪs {BOT_NAME}*" 
             "\n*ʙᴏᴛ ᴍᴜsɪᴄ ᴘʟᴜs ᴍᴀɴᴀɢᴇ ʙᴏᴛ ɢᴀ ᴀᴅᴀ ʏᴀɴɢ sᴘᴇsɪᴀʟ sᴀᴍᴀ ᴀᴊᴀ ᴋᴇᴋ ʙᴏᴛ ᴍᴜsɪᴄ ʟᴀᴇɴ ᴋᴀʟᴏ ᴍᴀᴜ ᴅᴏɴᴀsɪ ᴊᴀɴɢᴀɴ ʟᴜᴘᴀ ᴋʟɪᴋ /donate ᴏᴛᴇʏ*"
             "\n*ᴡʀɪᴛᴛᴇɴ ɪɴ ᴩʏᴛʜᴏɴ ᴡɪᴛʜ sǫʟᴀʟᴄʜᴇᴍʏ ᴀɴᴅ ᴍᴏɴɢᴏᴅʙ ᴀs ᴅᴀᴛᴀʙᴀsᴇ.*"
             "\n\n────────────────────"
@@ -435,25 +435,19 @@ def Source_about_callback(update: Update, context: CallbackContext):
     if query.data == "source_":
         query.message.edit_text(
             text=f"""
-*ʜᴇʏ,
- ᴛʜɪs ɪs {BOT_NAME},
-ᴀɴ ᴏᴩᴇɴ sᴏᴜʀᴄᴇ ᴛᴇʟᴇɢʀᴀᴍ ɢʀᴏᴜᴩ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ.*
+*Haiii {message.from_user.mention} ,
+ Dibawah ini beberapa jasa bot dan jajanan telegram dari [SI ARAB STORE](https://t.me/Arabc0de)
 
-ᴡʀɪᴛᴛᴇɴ ɪɴ ᴩʏᴛʜᴏɴ ᴡɪᴛʜ ᴛʜᴇ ʜᴇʟᴩ ᴏғ : [ᴛᴇʟᴇᴛʜᴏɴ](https://github.com/LonamiWebs/Telethon)
-[ᴩʏʀᴏɢʀᴀᴍ](https://github.com/pyrogram/pyrogram)
-[ᴩʏᴛʜᴏɴ-ᴛᴇʟᴇɢʀᴀᴍ-ʙᴏᴛ](https://github.com/python-telegram-bot/python-telegram-bot)
-ᴀɴᴅ ᴜsɪɴɢ [sǫʟᴀʟᴄʜᴇᴍʏ](https://www.sqlalchemy.org) ᴀɴᴅ [ᴍᴏɴɢᴏ](https://cloud.mongodb.com) ᴀs ᴅᴀᴛᴀʙᴀsᴇ.
-
-
-*Jɪᴋᴀ ᴀᴅᴀ ᴋᴇɴᴅᴀʟᴀ ʙɪsᴀ ᴍᴇɴɢʜᴜʙᴜɴɢɪ ᴅɪ :* [sᴜᴘᴘᴏʀᴛ](https://t.me/SiArab_Support)
-
-
-{BOT_NAME} © 2022 - 2023 | [sᴜᴘᴘᴏʀᴛ ᴄʜᴀᴛ](https://t.me/{SUPPORT_CHAT}), ᴀʟʟ ʀɪɢʜᴛs ʀᴇsᴇʀᴠᴇᴅ.
 """,
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="◁", callback_data="source_back")]]
+                [[InlineKeyboardButton(text="Ubot Premium", callback_data="UbotPrem")]]
+                [
+                    [InlineKeyboardButton(text="Jasa Deploy Bot", callback_data="source_back")]
+                    [InlineKeyboardButton(text="Jasa Telegram", callback_data="source_back")]
+                ]
+                [[InlineKeyboardButton(text="Kembali", callback_data="source_back")]]
             ),
         )
     elif query.data == "source_back":
