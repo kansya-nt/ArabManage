@@ -13,7 +13,7 @@ Dan Ubot Premium Support Segala Macam Emoji Premium di Dalam Modulnya
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("ᴅᴇᴠᴇʟᴏᴘᴇʀ", user_id=OWNER_ID),
+                    InlineKeyboardButton("Dhil Arab", user_id=OWNER_ID),
                     InlineKeyboardButton(
                         "Store",
                         url="https://t.me/Arabc0de",
