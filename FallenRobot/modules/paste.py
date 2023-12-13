@@ -62,9 +62,9 @@ async def paste_func(_, message):
     return await m.edit(link)
 
 
-__mod_name__ = "Pᴀsᴛᴇ"
+__mod_name__ = "Paste"
 __help__ = """
-Pastes the given file and shows you the result
+Tempelkan file yang diberikan dan tunjukkan hasilnya
 
- ❍ /paste *:* Reply to a text file
+ ✜ /paste *:* Membalas ke file teks
  """
