@@ -1,8 +1,10 @@
 #Coded By: @Dhilnihnge
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
-from FallenRobot import OWNER_ID, source_back,
+from FallenRobot import OWNER_ID, 
+from FallenRobot import *
 
+query = update.callback_query
 UbotPrem = """
 **ʜᴇʏ {message.from_user.mention} 
 UBot Premium adalah Userbot dengan fitur yang di sesuaikan dan di permudah untuk masalah deployment.
@@ -30,4 +32,13 @@ Dan Ubot Premium Support Segala Macam Emoji Premium di Dalam Modulnya
             ]
         ),
 
+if query.data == "source_back":
+        first_name = update.effective_user.first_name
+        query.message.edit_text(
+            PM_START_TEXT.format(escape_markdown(first_name), BOT_NAME),
+            reply_markup=InlineKeyboardMarkup(buttons),
+            parse_mode=ParseMode.MARKDOWN,
+            timeout=60,
+            disable_web_page_preview=True,
+        )
 
