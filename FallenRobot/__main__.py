@@ -434,7 +434,7 @@ def Source_about_callback(update: Update, context: CallbackContext):
     if query.data == "source_":
         query.message.edit_text(
             text=f"""
-*Haiii {message.from_user.mention} ,
+*Haiii,
  Dibawah ini beberapa jasa bot dan jajanan telegram dari [SI ARAB STORE](https://t.me/Arabc0de)
 
 """,
@@ -453,7 +453,7 @@ def Source_about_callback(update: Update, context: CallbackContext):
     elif query.data == "Ubot_":
         query.message.edit_text(
             text=f"""
-***ʜᴇʏ {message.from_user.mention} 
+***Haii, 
 UBot Premium adalah Userbot dengan fitur yang di sesuaikan dan di permudah untuk masalah deployment.
 Dan Ubot Premium Support Segala Macam Emoji Premium di Dalam Modulnya
 
