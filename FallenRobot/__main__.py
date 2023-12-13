@@ -44,7 +44,6 @@ from FallenRobot import (
 from FallenRobot.modules import ALL_MODULES
 from FallenRobot.modules.helper_funcs.chat_status import is_user_admin
 from FallenRobot.modules.helper_funcs.misc import paginate_modules
-from ArabStore import UbotPrem
 
 def get_readable_time(seconds: int) -> str:
     count = 0
@@ -379,7 +378,7 @@ def Fallen_about_callback(update: Update, context: CallbackContext):
                             text="ᴅᴇᴠ", url=f"tg://user?id={OWNER_ID}"
                         ),
                         InlineKeyboardButton(
-                            text="sᴏᴜʀᴄᴇ",
+                            text="Jasa Bot",
                             callback_data="source_",
                         ),
                     ],
@@ -442,7 +441,7 @@ def Source_about_callback(update: Update, context: CallbackContext):
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="Ubot Premium", callback_data="UbotPrem")]]
+                [[InlineKeyboardButton(text="Ubot Premium", callback_data="Ubot_")]]
                 [
                     [InlineKeyboardButton(text="Jasa Deploy Bot", callback_data="source_back")]
                     [InlineKeyboardButton(text="Jasa Telegram", callback_data="source_back")]
@@ -450,6 +449,29 @@ def Source_about_callback(update: Update, context: CallbackContext):
                 [[InlineKeyboardButton(text="Kembali", callback_data="source_back")]]
             ),
         )
+
+    elif query.data == "Ubot_":
+        query.message.edit_text(
+            text=f"""
+***ʜᴇʏ {message.from_user.mention} 
+UBot Premium adalah Userbot dengan fitur yang di sesuaikan dan di permudah untuk masalah deployment.
+Dan Ubot Premium Support Segala Macam Emoji Premium di Dalam Modulnya
+
+• Bot Premium -> Rp.30k/bulan
+""",
+parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton(text="Dhil Arab", url="https://t.me/Dhilnihnge")]]
+                [
+                    [InlineKeyboardButton(text="Arab Ubot Ultra", url="https://t.me/ArabUltraUbot")]
+                    [InlineKeyboardButton(text="Arab Spesial Ubot", url="https://t.me/Spesial01Ubot")]
+                ]
+                [[InlineKeyboardButton(text="Kembali", callback_data="source_back")]]
+            ),
+        )
+
+    
     elif query.data == "source_back":
         first_name = update.effective_user.first_name
         query.message.edit_text(
@@ -460,7 +482,7 @@ def Source_about_callback(update: Update, context: CallbackContext):
             disable_web_page_preview=True,
         )
 
-
+                
 def get_help(update: Update, context: CallbackContext):
     chat = update.effective_chat  # type: Optional[Chat]
     args = update.effective_message.text.split(None, 1)
