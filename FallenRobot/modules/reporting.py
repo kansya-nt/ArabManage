@@ -31,15 +31,15 @@ def report_setting(update: Update, context: CallbackContext):
             if args[0] in ("yes", "on"):
                 sql.set_user_setting(chat.id, True)
                 msg.reply_text(
-                    "Turned on reporting! You'll be notified whenever anyone reports something."
+                    "Aktifkan pelaporan! Anda akan diberitahu setiap kali ada yang melaporkan sesuatu."
                 )
 
             elif args[0] in ("no", "off"):
                 sql.set_user_setting(chat.id, False)
-                msg.reply_text("Turned off reporting! You wont get any reports.")
+                msg.reply_text("Nonaktifkan pelaporan! Anda tidak akan mendapatkan laporan apa pun.")
         else:
             msg.reply_text(
-                f"Your current report preference is: `{sql.user_should_report(chat.id)}`",
+                f"Preferensi laporan Anda saat ini adalah: `{sql.user_should_report(chat.id)}`",
                 parse_mode=ParseMode.MARKDOWN,
             )
 
@@ -48,7 +48,7 @@ def report_setting(update: Update, context: CallbackContext):
             if args[0] in ("yes", "on"):
                 sql.set_chat_setting(chat.id, True)
                 msg.reply_text(
-                    "Turned on reporting! Admins who have turned on reports will be notified when /report "
+                    "Aktifkan pelaporan! Admin yang telah mengaktifkan laporan akan diberi tahu kapan /report "
                     "or @admin is called."
                 )
 
@@ -261,15 +261,15 @@ def buttons(update: Update, context: CallbackContext):
 
 
 __help__ = """
- ❍ /report <reason>*:* reply to a message to report it to admins.
- ❍ @admin*:* reply to a message to report it to admins.
+ ✜ /report <reason>*:* membalas pesan untuk melaporkannya ke admin.
+ ✜ @admin*:* membalas pesan untuk melaporkannya ke admin.
  
-*Note :* Neither of these will get triggered if used by admins.
+*Note :* Tak satu pun dari ini akan terpicu jika digunakan oleh admin.
 
 *Admins only:*
- ❍ /reports <on/off>*:* change report setting, or view current status.
-   • If done in pm, toggles your status.
-   • If in group, toggles that groups's status.
+ ✜ /reports <on/off>*:* mengubah pengaturan laporan, atau melihat status saat ini.
+   • Jika selesai di sore hari, ubah status Anda.
+   • Jika berada dalam grup, alihkan status grup tersebut.
 """
 
 SETTING_HANDLER = CommandHandler("reports", report_setting, run_async=True)
@@ -288,7 +288,7 @@ dispatcher.add_handler(SETTING_HANDLER)
 dispatcher.add_handler(REPORT_HANDLER, REPORT_GROUP)
 dispatcher.add_handler(ADMIN_REPORT_HANDLER, REPORT_GROUP)
 
-__mod_name__ = "Rᴇᴘᴏʀᴛs"
+__mod_name__ = "Report"
 __handlers__ = [
     (REPORT_HANDLER, REPORT_GROUP),
     (ADMIN_REPORT_HANDLER, REPORT_GROUP),
