@@ -443,7 +443,7 @@ Haiii,
             reply_markup=InlineKeyboardMarkup(
                 [[InlineKeyboardButton(text="Ubot Premium", callback_data="Ubot_")]]
                 [
-                    [InlineKeyboardButton(text="Jasa Deploy Bot", callback_data="bot_tele")]
+                    [InlineKeyboardButton(text="Jasa Deploy Bot", callback_data="Perabot_")]
                     [InlineKeyboardButton(text="Jasa Telegram", url="https://t.me/Arabc0de")]
                 ]
                 [[InlineKeyboardButton(text="Kembali", callback_data="source_back")]]
@@ -471,7 +471,7 @@ parse_mode=ParseMode.MARKDOWN,
             ),
         )
 
-     elif query.data == "bot_tele":
+     elif query.data == "Perabot_":
         query.message.edit_text(
             text=f""" 
 <b>Jasa Deploy Bot Telegram :</b>
