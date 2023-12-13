@@ -347,7 +347,7 @@ def Fallen_about_callback(update: Update, context: CallbackContext):
     if query.data == "fallen_":
         uptime = get_readable_time((time.time() - StartTime))
         query.message.edit_text(
-            text=f"*ʏᴏᴏ,[🤖](https://telegra.ph//file/3900ea5b3385ac7632dac.jpg)\n  *ᴛʜɪs ɪs {BOT_NAME}*" 
+            text=f"*ʏᴏᴏ\n  *ᴛʜɪs ɪs {BOT_NAME}*" 
             "\n*ʙᴏᴛ ᴍᴜsɪᴄ ᴘʟᴜs ᴍᴀɴᴀɢᴇ ʙᴏᴛ ɢᴀ ᴀᴅᴀ ʏᴀɴɢ sᴘᴇsɪᴀʟ sᴀᴍᴀ ᴀᴊᴀ ᴋᴇᴋ ʙᴏᴛ ᴍᴜsɪᴄ ʟᴀᴇɴ ᴋᴀʟᴏ ᴍᴀᴜ ᴅᴏɴᴀsɪ ᴊᴀɴɢᴀɴ ʟᴜᴘᴀ ᴋʟɪᴋ /donate ᴏᴛᴇʏ*"
             "\n*ᴡʀɪᴛᴛᴇɴ ɪɴ ᴩʏᴛʜᴏɴ ᴡɪᴛʜ sǫʟᴀʟᴄʜᴇᴍʏ ᴀɴᴅ ᴍᴏɴɢᴏᴅʙ ᴀs ᴅᴀᴛᴀʙᴀsᴇ.*"
             "\n\n────────────────────"
@@ -367,15 +367,15 @@ def Fallen_about_callback(update: Update, context: CallbackContext):
                 [
                     [
                         InlineKeyboardButton(
-                            text="sᴜᴩᴩᴏʀᴛ", callback_data="fallen_support"
+                            text="Support", callback_data="fallen_support"
                         ),
                         InlineKeyboardButton(
-                            text="ᴄᴏᴍᴍᴀɴᴅs", callback_data="help_back"
+                            text="Commands", callback_data="help_back"
                         ),
                     ],
                     [
                         InlineKeyboardButton(
-                            text="ᴅᴇᴠ", url=f"tg://user?id={OWNER_ID}"
+                            text="Dev", url=f"tg://user?id={OWNER_ID}"
                         ),
                         InlineKeyboardButton(
                             text="Jasa Bot",
@@ -434,7 +434,7 @@ def Source_about_callback(update: Update, context: CallbackContext):
     if query.data == "source_":
         query.message.edit_text(
             text=f"""
-*Haiii,
+Haiii,
  Dibawah ini beberapa jasa bot dan jajanan telegram dari [SI ARAB STORE](https://t.me/Arabc0de)
 
 """,
@@ -443,8 +443,8 @@ def Source_about_callback(update: Update, context: CallbackContext):
             reply_markup=InlineKeyboardMarkup(
                 [[InlineKeyboardButton(text="Ubot Premium", callback_data="Ubot_")]]
                 [
-                    [InlineKeyboardButton(text="Jasa Deploy Bot", callback_data="source_back")]
-                    [InlineKeyboardButton(text="Jasa Telegram", callback_data="source_back")]
+                    [InlineKeyboardButton(text="Jasa Deploy Bot", callback_data="bot_tele")]
+                    [InlineKeyboardButton(text="Jasa Telegram", url="https://t.me/Arabc0de")]
                 ]
                 [[InlineKeyboardButton(text="Kembali", callback_data="source_back")]]
             ),
@@ -453,7 +453,7 @@ def Source_about_callback(update: Update, context: CallbackContext):
     elif query.data == "Ubot_":
         query.message.edit_text(
             text=f"""
-***Haii, 
+Haii, 
 UBot Premium adalah Userbot dengan fitur yang di sesuaikan dan di permudah untuk masalah deployment.
 Dan Ubot Premium Support Segala Macam Emoji Premium di Dalam Modulnya
 
@@ -470,6 +470,32 @@ parse_mode=ParseMode.MARKDOWN,
                 [[InlineKeyboardButton(text="Kembali", callback_data="source_back")]]
             ),
         )
+
+     elif query.data == "bot_tele":
+        query.message.edit_text(
+            text=f""" 
+<b>Jasa Deploy Bot Telegram :</b>
+
+• Bot Menfes -> 90k/bulan (support ava Sugdad, Talent dll )
+• Fsub/File Share/Bot Asupan -> Rp.30k/bulan(Nambah Button 10k)
+• Bot Musik Ram 4GB -> 100k/bulan
+• Bot Musik Ram 8GB -> 180k/bulan
+• Bot Manage Seperti Robot Ini -> 90k/bulan
+
+<b>Info Selengkapnya Bisa Contact Saya.</b>
+""",
+parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton(text="Dhil Arab", url="https://t.me/Dhilnihnge")]]
+                [
+                    [InlineKeyboardButton(text="Store", url="https://t.me/Arabc0de")]
+                    [InlineKeyboardButton(text="Ubot Prem", callback_data="Ubot_")]
+                ]
+                [[InlineKeyboardButton(text="Kembali", callback_data="source_back")]]
+            ),
+        )
+
 
     
     elif query.data == "source_back":
