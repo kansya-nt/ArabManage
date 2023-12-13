@@ -468,7 +468,7 @@ def __stats__():
     )
 
 
-__mod_name__ = "Bʟᴀᴄᴋʟɪsᴛ"
+__mod_name__ = "Blacklist"
 
 __help__ = """
 
@@ -476,12 +476,12 @@ Blacklists are used to stop certain triggers from being said in a group. Any tim
 
 *NOTE*: Blacklists do not affect group admins.
 
- ❍ /blacklist*:* View the current blacklisted words.
+ ♜ /blacklist*:* View the current blacklisted words.
 
 Admin only:
- ❍ /bl <triggers>*:* reply ke pesan atau tuliskan trigger yang ingin di blacklist di group.
- ❍ /unbl <triggers>*:* Remove triggers from the blacklist. Same newline logic applies here, so you can remove multiple triggers at once.
- ❍ /blacklistmode <off/del/warn/ban/kick/mute/tban/tmute>*:* Action to perform when someone sends blacklisted words.
+ ♜ /bl <triggers>*:* reply ke pesan atau tuliskan trigger yang ingin di blacklist di group.
+ ♜ /unbl <triggers>*:* Hapus pemicu dari daftar hitam. Logika baris baru yang sama berlaku di sini, sehingga Anda dapat menghapus beberapa pemicu sekaligus.
+ ♜ /blmode <off/del/warn/ban/kick/mute/tban/tmute>*:* Tindakan yang harus dilakukan ketika seseorang mengirimkan kata-kata yang masuk daftar hitam.
 """
 
 BLACKLIST_HANDLER = DisableAbleCommandHandler(
@@ -490,7 +490,7 @@ BLACKLIST_HANDLER = DisableAbleCommandHandler(
 ADD_BLACKLIST_HANDLER = CommandHandler("bl", add_blacklist, run_async=True)
 UNBLACKLIST_HANDLER = CommandHandler("unbl", unblacklist, run_async=True)
 BLACKLISTMODE_HANDLER = CommandHandler(
-    "blacklistmode", blacklist_mode, pass_args=True, run_async=True
+    "blmode", blacklist_mode, pass_args=True, run_async=True
 )
 BLACKLIST_DEL_HANDLER = MessageHandler(
     (Filters.text | Filters.command | Filters.sticker | Filters.photo)
