@@ -133,6 +133,7 @@ def unblacklist(update, context):
     chat = update.effective_chat
     user = update.effective_user
     words = msg.text.split(None, 1)
+    reply_msg = msg.reply_to_message  # Ambil pesan yang di-reply
 
     conn = connected(context.bot, update, chat, user.id)
     if conn:
@@ -144,7 +145,21 @@ def unblacklist(update, context):
             return
         else:
             chat_name = chat.title
-
+		
+    if reply_msg:  # Jika ada pesan yang di-reply
+        text = reply_msg.text
+    else:
+        words = msg.text.split(None, 1)
+        if len(words) > 1:
+            text = words[1]
+        else:
+            send_message(
+                update.effective_message,
+                "Tell me which words you would like to add in blacklist.",
+            )
+		
+            return
+		
     if len(words) > 1:
         text = words[1]
         to_unblacklist = list(
@@ -209,6 +224,7 @@ def blacklist_mode(update, context):
     chat = update.effective_chat
     user = update.effective_user
     msg = update.effective_message
+    reply_msg = update.msg.reply_to_message
     args = context.args
 
     conn = connected(context.bot, update, chat, user.id, need_admin=True)
@@ -226,7 +242,8 @@ def blacklist_mode(update, context):
         chat = update.effective_chat
         chat_id = update.effective_chat.id
         chat_name = update.effective_message.chat.title
-
+        reply_msg = update.msg.reply_to_message
+	    
     if args:
         if args[0].lower() in ["off", "nothing", "no"]:
             settypeblacklist = "do nothing"
@@ -462,16 +479,16 @@ Blacklists are used to stop certain triggers from being said in a group. Any tim
  ❍ /blacklist*:* View the current blacklisted words.
 
 Admin only:
- ❍ /addblacklist <triggers>*:* reply ke pesan atau tuliskan trigger yang ingin di blacklist di group.
- ❍ /unblacklist <triggers>*:* Remove triggers from the blacklist. Same newline logic applies here, so you can remove multiple triggers at once.
+ ❍ /bl <triggers>*:* reply ke pesan atau tuliskan trigger yang ingin di blacklist di group.
+ ❍ /unbl <triggers>*:* Remove triggers from the blacklist. Same newline logic applies here, so you can remove multiple triggers at once.
  ❍ /blacklistmode <off/del/warn/ban/kick/mute/tban/tmute>*:* Action to perform when someone sends blacklisted words.
 """
 
 BLACKLIST_HANDLER = DisableAbleCommandHandler(
     "blacklist", blacklist, pass_args=True, admin_ok=True, run_async=True
 )
-ADD_BLACKLIST_HANDLER = CommandHandler("addblacklist", add_blacklist, run_async=True)
-UNBLACKLIST_HANDLER = CommandHandler("unblacklist", unblacklist, run_async=True)
+ADD_BLACKLIST_HANDLER = CommandHandler("bl", add_blacklist, run_async=True)
+UNBLACKLIST_HANDLER = CommandHandler("unbl", unblacklist, run_async=True)
 BLACKLISTMODE_HANDLER = CommandHandler(
     "blacklistmode", blacklist_mode, pass_args=True, run_async=True
 )
