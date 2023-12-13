@@ -44,7 +44,7 @@ from FallenRobot import (
 from FallenRobot.modules import ALL_MODULES
 from FallenRobot.modules.helper_funcs.chat_status import is_user_admin
 from FallenRobot.modules.helper_funcs.misc import paginate_modules
-from ArabStore.UbotPrem import UbotPrem
+from ArabStore.Ubot_.py import UbotPrem
 
 def get_readable_time(seconds: int) -> str:
     count = 0
