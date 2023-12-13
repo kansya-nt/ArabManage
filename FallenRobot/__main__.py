@@ -471,7 +471,20 @@ parse_mode=ParseMode.MARKDOWN,
             ),
         )
 
-     elif query.data == "Perabot_":
+        
+        elif query.data == "source_back":
+        first_name = update.effective_user.first_name
+        query.message.edit_text(
+            PM_START_TEXT.format(escape_markdown(first_name), BOT_NAME),
+            reply_markup=InlineKeyboardMarkup(buttons),
+            parse_mode=ParseMode.MARKDOWN,
+            timeout=60,
+            disable_web_page_preview=True,
+        )
+    
+def Bot_Tele_callback(update: Update, context: CallbackContext):
+    query = update.callback_query
+     if query.data == "Perabot_":
         query.message.edit_text(
             text=f""" 
 <b>Jasa Deploy Bot Telegram :</b>
@@ -495,10 +508,29 @@ parse_mode=ParseMode.MARKDOWN,
                 [[InlineKeyboardButton(text="Kembali", callback_data="source_back")]]
             ),
         )
+ elif query.data == "Ubot_":
+        query.message.edit_text(
+            text=f"""
+Haii, 
+UBot Premium adalah Userbot dengan fitur yang di sesuaikan dan di permudah untuk masalah deployment.
+Dan Ubot Premium Support Segala Macam Emoji Premium di Dalam Modulnya
 
+• Bot Premium -> Rp.30k/bulan
+""",
+parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton(text="Dhil Arab", url="https://t.me/Dhilnihnge")]]
+                [
+                    [InlineKeyboardButton(text="Arab Ubot Ultra", url="https://t.me/ArabUltraUbot")]
+                    [InlineKeyboardButton(text="Arab Spesial Ubot", url="https://t.me/Spesial01Ubot")]
+                ]
+                [[InlineKeyboardButton(text="Kembali", callback_data="source_back")]]
+            ),
+        )
 
-    
-    elif query.data == "source_back":
+        
+        elif query.data == "source_back":
         first_name = update.effective_user.first_name
         query.message.edit_text(
             PM_START_TEXT.format(escape_markdown(first_name), BOT_NAME),
@@ -507,7 +539,6 @@ parse_mode=ParseMode.MARKDOWN,
             timeout=60,
             disable_web_page_preview=True,
         )
-
                 
 def get_help(update: Update, context: CallbackContext):
     chat = update.effective_chat  # type: Optional[Chat]
