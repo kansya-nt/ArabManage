@@ -1,16 +1,10 @@
-import asyncio
+import traceback
+from logging import getLogger
 
 from pyrogram import Client, filters
-from oldpyro import Client as Client1
-from oldpyro.errors import ApiIdInvalid as ApiIdInvalid1
-from oldpyro.errors import PasswordHashInvalid as PasswordHashInvalid1
-from oldpyro.errors import PhoneCodeExpired as PhoneCodeExpired1
-from oldpyro.errors import PhoneCodeInvalid as PhoneCodeInvalid1
-from oldpyro.errors import PhoneNumberInvalid as PhoneNumberInvalid1
-from oldpyro.errors import SessionPasswordNeeded as SessionPasswordNeeded1
 from pyrogram.errors import (
     ApiIdInvalid,
-    FloodWait,
+    ListenerTimeout,
     PasswordHashInvalid,
     PhoneCodeExpired,
     PhoneCodeInvalid,
