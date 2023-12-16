@@ -6,7 +6,7 @@ from pyrogram.errors import ChatAdminRequired, UserNotParticipant, ChatWriteForb
 from FallenRobot import pbot
 
 @pbot.on_message(filters.incoming & filters.private, group=-1)
-async def must_join_channel(bot: Anony, msg: Message):
+async def must_join_channel(bot: pbot, msg: Message):
     if not MUST_JOIN:  # Not compulsory
         return
     try:
