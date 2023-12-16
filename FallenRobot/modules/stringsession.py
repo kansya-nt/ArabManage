@@ -33,7 +33,9 @@ from telethon.tl.functions.channels import JoinChannelRequest
 from pyromod.listen.listen import ListenerTimeout
 
 from FallenRobot.config import API_HASH, API_ID
-from FallenRobot import Anony
+from FallenRobot import pbot
+
+LOGGER = getLogger("FallenRobot")
 
 ask_ques = "**» Silakan pilih library yang ingin Anda hasilkan stringnya :**\n\nNote: Saya tidak mengumpulkan informasi pribadi apa pun dari fitur ini, Anda dapat menggunakan bot sendiri jika Anda mau."
 buttons_ques = [
