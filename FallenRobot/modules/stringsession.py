@@ -26,7 +26,11 @@ from telethon.sessions import StringSession
 from telethon.tl.functions.channels import JoinChannelRequest
 from pyromod.listen.listen import ListenerTimeout
 
-from config import API_HASH, API_ID
+from FalenRobot import ( 
+API_HASH,
+API_ID,
+dispatcher,
+)
 from FallenRobot import pbot
 
 LOGGER = getLogger("FallenRobot")
@@ -294,3 +298,8 @@ Untuk Mengambil String Session PyrogramV2 & Telethon
 
 
 """
+dispatcher.add_handler(genstring)
+dispatcher.add_handler(pyrogram)
+dispatcher.add_handler(pyrogram_bot)
+dispatcher.add_handler(telethon_bot)
+dispatcher.add_handler(telethon)
