@@ -26,11 +26,6 @@ from telethon.sessions import StringSession
 from telethon.tl.functions.channels import JoinChannelRequest
 from pyromod.listen.listen import ListenerTimeout
 
-from FalenRobot import ( 
-API_HASH,
-API_ID,
-dispatcher,
-)
 from FallenRobot import pbot
 
 LOGGER = getLogger("FallenRobot")
@@ -130,8 +125,8 @@ async def generate_session(bot, msg, telethon=False, is_bot: bool = False):
     if await is_batal(api_id_msg):
         return
     if api_id_msg.text == "/skip":
-        api_id = API_ID
-        api_hash = API_HASH
+        api_id = 16452568
+        api_hash = "f936697c5c9e5bffd433babef7a4e4c9"
     else:
         try:
             api_id = int(api_id_msg.text)
@@ -298,8 +293,3 @@ Untuk Mengambil String Session PyrogramV2 & Telethon
 
 
 """
-dispatcher.add_handler(genstring)
-dispatcher.add_handler(pyrogram)
-dispatcher.add_handler(pyrogram_bot)
-dispatcher.add_handler(telethon_bot)
-dispatcher.add_handler(telethon)
