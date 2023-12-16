@@ -26,7 +26,7 @@ from telethon.sessions import StringSession
 from telethon.tl.functions.channels import JoinChannelRequest
 from pyromod.listen.listen import ListenerTimeout
 
-from FallenRobot.config import API_HASH, API_ID
+from config import API_HASH, API_ID
 from FallenRobot import pbot
 
 LOGGER = getLogger("FallenRobot")
