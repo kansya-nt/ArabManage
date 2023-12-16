@@ -19,7 +19,7 @@ async def must_join_channel(bot: pbot, msg: Message):
                 chat_info = await bot.get_chat(MUST_JOIN)
                 link = chat_info.invite_link
             try:
-                await msg.reply(
+                await update.effective_message.reply_text(
                     f"Join Dulu Kampang Baru Pencet /start Lagi !",
                     disable_web_page_preview=True,
                     reply_markup=InlineKeyboardMarkup([
