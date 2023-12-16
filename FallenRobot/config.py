@@ -5,6 +5,8 @@ class Config(object):
     API_ID = 16452568
     API_HASH = "f936697c5c9e5bffd433babef7a4e4c9"
 
+    MUST_JOIN = "SiArab_Support"
+
     CASH_API_KEY = "J1BBEIOV38CZ"  # Get this value for currency converter from https://www.alphavantage.co/support/#api-key
 
     DATABASE_URL = "postgresql://doadmin:AVNS_cN2xIItX9Umi8x7XYfs@db-sql-do-user-15262677-0.c.db.ondigitalocean.com:25060/defaultdb?sslmode=require"  # A sql database url from elephantsql.com
