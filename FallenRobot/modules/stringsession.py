@@ -1,10 +1,16 @@
-import traceback
-from logging import getLogger
+import asyncio
 
 from pyrogram import Client, filters
+from oldpyro import Client as Client1
+from oldpyro.errors import ApiIdInvalid as ApiIdInvalid1
+from oldpyro.errors import PasswordHashInvalid as PasswordHashInvalid1
+from oldpyro.errors import PhoneCodeExpired as PhoneCodeExpired1
+from oldpyro.errors import PhoneCodeInvalid as PhoneCodeInvalid1
+from oldpyro.errors import PhoneNumberInvalid as PhoneNumberInvalid1
+from oldpyro.errors import SessionPasswordNeeded as SessionPasswordNeeded1
 from pyrogram.errors import (
     ApiIdInvalid,
-    ListenerTimeout,
+    FloodWait,
     PasswordHashInvalid,
     PhoneCodeExpired,
     PhoneCodeInvalid,
@@ -21,275 +27,270 @@ from telethon.errors import (
     PhoneNumberInvalidError,
     SessionPasswordNeededError,
 )
-
 from telethon.sessions import StringSession
 from telethon.tl.functions.channels import JoinChannelRequest
 from pyromod.listen.listen import ListenerTimeout
 
-from FallenRobot import pbot
+from FallenRobot import SUPPORT_CHAT
 
-LOGGER = getLogger("FallenRobot")
-
-ask_ques = "**» Silakan pilih library yang ingin Anda hasilkan stringnya :**\n\nNote: Saya tidak mengumpulkan informasi pribadi apa pun dari fitur ini, Anda dapat menggunakan bot sendiri jika Anda mau."
-buttons_ques = [
+keyboard = InlineKeyboardMarkup(
     [
-        InlineKeyboardButton("Pyrogram v2", callback_data="pyrogram"),
-        InlineKeyboardButton("Telethon", callback_data="telethon"),
-    ],
+        [InlineKeyboardButton(text="ʙᴜᴀᴛ sᴛʀɪɴɢ", callback_data="gensession")],
+        )
+
+gen_key = InlineKeyboardMarkup(
     [
-        InlineKeyboardButton("Pyrogram Bot", callback_data="pyrogram_bot"),
-        InlineKeyboardButton("Telethon Bot", callback_data="telethon_bot"),
-    ],
-]
+        [
+            InlineKeyboardButton(text="ᴩʏʀᴏɢʀᴀᴍ v1", callback_data="pyrogram1"),
+            InlineKeyboardButton(text="ᴩʏʀᴏɢʀᴀᴍ v2", callback_data="pyrogram"),
+        ],
+        [InlineKeyboardButton(text="ᴛᴇʟᴇᴛʜᴏɴ", callback_data="telethon")],
+    ]
+)
 
-gen_button = [
-    [InlineKeyboardButton(text="Ambil String", callback_data="genstring")]
-]
+retry_key = InlineKeyboardMarkup(
+    [[InlineKeyboardButton(text="ᴛʀʏ ᴀɢᴀɪɴ", callback_data="gensession")]]
+)
 
-
-async def is_batal(msg):
-    if msg.text == "/cancel":
-        await msg.reply(
-            "**» Membatalkan proses pembuatan sesi string yang sedang berlangsung !**",
-            quote=True,
-            reply_markup=InlineKeyboardMarkup(gen_button),
-        )
-        return True
-    elif msg.text == "/skip":
-        return False
-    elif msg.text.startswith("/"):  # Bot Commands
-        await msg.reply(
-            "**» Membatalkan proses pembuatan sesi string yang sedang berlangsung!**",
-            quote=True,
-        )
-        return True
-    else:
-        return False
 
 
 @pbot.on_callback_query(
-    filters.regex(pattern=r"^(genstring|pyrogram|pyrogram_bot|telethon_bot|telethon)$")
+    filters.regex(pattern=r"^(gensession|pyrogram|pyrogram1|telethon)$")
 )
-async def callbackgenstring(bot, callback_query):
-    query = callback_query.matches[0].group(1)
-    if query == "genstring":
-        await callback_query.answer()
-        await callback_query.message.reply(
-            ask_ques, reply_markup=InlineKeyboardMarkup(buttons_ques)
+async def cb_choose(_, cq: CallbackQuery):
+    await cq.answer()
+    query = cq.matches[0].group(1)
+    if query == "gensession":
+        return await cq.message.reply_text(
+            text="<b>» ᴋʟɪᴋ ᴘᴀᴅᴀ ᴛᴏᴍʙᴏʟ ᴛᴏᴍʙᴏʟ ᴅɪ ʙᴀᴡᴀʜ ᴜɴᴛᴜᴋ ᴍᴇɴɢʜᴀsɪʟᴋᴀɴ sᴛʀɪɴɢ ᴀɴᴅᴀ :</b>",
+            reply_markup=gen_key,
         )
     elif query.startswith("pyrogram") or query.startswith("telethon"):
         try:
             if query == "pyrogram":
-                await callback_query.answer()
-                await generate_session(bot, callback_query.message)
-            elif query == "pyrogram_bot":
-                await callback_query.answer(
-                    "» Generator sesinya adalah Pyrogram v2.", show_alert=True
-                )
-                await generate_session(bot, callback_query.message, is_bot=True)
-            elif query == "telethon_bot":
-                await callback_query.answer()
-                await generate_session(
-                    bot, callback_query.message, telethon=True, is_bot=True
-                )
+                await gen_session(cq.message, cq.from_user.id)
+            elif query == "pyrogram1":
+                await gen_session(cq.message, cq.from_user.id, old_pyro=True)
             elif query == "telethon":
-                await callback_query.answer()
-                await generate_session(bot, callback_query.message, telethon=True)
+                await gen_session(cq.message, cq.from_user.id, telethon=True)
         except Exception as e:
-            LOGGER.error(traceback.format_exc())
-            ERROR_MESSAGE = (
-                "Something went wrong. \n\n**ERROR** : {} "
-                "\n\n**Please forward this message to my Owner**, if this message "
-                "doesn't contain any sensitive data "
-                "because this error is **not logged by bot.** !"
-            )
-            await callback_query.message.reply(ERROR_MESSAGE.format(str(e)))
+            await cq.edit_message_text(e, disable_web_page_preview=True)
 
-
-@pbot.on_message(
-    filters.private & ~filters.forwarded & filters.command("genstring")
-)
-async def genstringg(_, msg):
-    await msg.reply(ask_ques, reply_markup=InlineKeyboardMarkup(buttons_ques))
-
-
-async def generate_session(bot, msg, telethon=False, is_bot: bool = False):
-    ty = "Telethon" if telethon else "Pyrogram"
-    if is_bot:
-        ty += " Bot"
-    await msg.reply(f"» Mencoba untuk memulai **{ty}** generator string...")
-    api_id_msg = await msg.chat.ask(
-        " **API_ID** to proceed.\n\nClick on /skip for using bot's api.",
-        filters=filters.text,
-    )
-    if await is_batal(api_id_msg):
-        return
-    if api_id_msg.text == "/skip":
-        api_id = 16452568
-        api_hash = "f936697c5c9e5bffd433babef7a4e4c9"
-    else:
-        try:
-            api_id = int(api_id_msg.text)
-            await api_id_msg.delete()
-        except ValueError:
-            return await api_id_msg.reply(
-                "Tolong kirimkan **API_ID** harus bilangan bulat, mulailah membuat sesi Anda lagi.",
-                quote=True,
-                reply_markup=InlineKeyboardMarkup(gen_button),
-            )
-        api_hash_msg = await msg.chat.ask(
-            "» Tolong kirimkan **API_HASH** untuk melanjutkan.", filters=filters.text
-        )
-        if await is_batal(api_hash_msg):
-            return
-        api_hash = api_hash_msg.text
-        await api_hash_msg.delete()
-    t = (
-        "Please send your **BOT_TOKEN** to continue.\nExample : `5432198765:abcdanonymousterabaaplol`'"
-        if is_bot
-        else "» Tolong kirimkan **PHONE_NUMBER** dengan kode negara yang ingin Anda buat sesinya. \nContoh : `+6286356837789`'"
-    )
-    phone_number_msg = await msg.chat.ask(t, filters=filters.text)
-    if await is_batal(phone_number_msg):
-        return
-    phone_number = phone_number_msg.text
-    await phone_number_msg.delete()
-    if not is_bot:
-        await msg.reply("» Mencoba mengirim OTP ke nomor yang diberikan...")
-    else:
-        await msg.reply("» Trying to login using Bot Token...")
-    if telethon and is_bot or telethon:
-        client = TelegramClient(StringSession(), api_id, api_hash)
-    elif is_bot:
-        client = Client(
-            name="bot",
-            api_id=api_id,
-            api_hash=api_hash,
-            bot_token=phone_number,
-            in_memory=True,
-        )
-    else:
-        client = Client(name="user", api_id=api_id, api_hash=api_hash, in_memory=True)
-    await client.connect()
-    try:
-        code = None
-        if not is_bot:
-            if telethon:
-                code = await client.send_code_request(phone_number)
-            else:
-                code = await client.send_code(phone_number)
-    except (ApiIdInvalid, ApiIdInvalidError):
-        return await msg.reply(
-            "» **API_ID** dan **API_HASH** kombinasinya tidak cocok. \n\nSilakan mulai membuat string Anda lagi.",
-            reply_markup=InlineKeyboardMarkup(gen_button),
-        )
-    except (PhoneNumberInvalid, PhoneNumberInvalidError):
-        return await msg.reply(
-            "» **PHONE_NUMBER** Anda bukan anggota akun mana pun di Telegram.\n\nSilakan mulai membuat sesi Anda lagi.",
-            reply_markup=InlineKeyboardMarkup(gen_button),
-        )
-    try:
-        phone_code_msg = None
-        if not is_bot:
-            phone_code_msg = await msg.chat.ask(
-                "» tolong kirimkan **OTP** Yang Anda terima dari Telegram di akun Anda.\nJika OTP `12345`, **tolong kirimkan dengan format** `1 2 3 4 5`.",
-                filters=filters.text,
-                timeout=600,
-            )
-            if await is_batal(phone_code_msg):
-                return
-    except ListenerTimeout:
-        return await msg.reply(
-            "» Batas waktu mencapai 10 menit.\n\nSilakan mulai membuat sesi Anda lagi.",
-            reply_markup=InlineKeyboardMarkup(gen_button),
-        )
-    if not is_bot:
-        phone_code = phone_code_msg.text.replace(" ", "")
-        await phone_code_msg.delete()
-        try:
-            if telethon:
-                await client.sign_in(phone_number, phone_code, password=None)
-            else:
-                await client.sign_in(phone_number, code.phone_code_hash, phone_code)
-        except (PhoneCodeInvalid, PhoneCodeInvalidError):
-            return await msg.reply(
-                "» OTP yang Anda kirim adalah **salah.**\n\nSilakan mulai membuat sesi Anda lagi.",
-                reply_markup=InlineKeyboardMarkup(gen_button),
-            )
-        except (PhoneCodeExpired, PhoneCodeExpiredError):
-            return await msg.reply(
-                "» OTP yang Anda kirim adalah **expired.**\n\nSilakan mulai membuat sesi Anda lagi.",
-                reply_markup=InlineKeyboardMarkup(gen_button),
-            )
-        except (SessionPasswordNeeded, SessionPasswordNeededError):
-            try:
-                two_step_msg = await msg.chat.ask(
-                    "» Silakan masukkan **Two Step Verification** pwnya untuk melanjutkan.",
-                    filters=filters.text,
-                    timeout=300,
-                )
-            except ListenerTimeout:
-                return await msg.reply(
-                    "» Batas waktu mencapai 5 menit.\n\nSilakan mulai membuat sesi Anda lagi.",
-                    reply_markup=InlineKeyboardMarkup(gen_button),
-                )
-            try:
-                password = two_step_msg.text
-                await two_step_msg.delete()
-                if telethon:
-                    await client.sign_in(password=password)
-                else:
-                    await client.check_password(password=password)
-                if await is_batal(api_id_msg):
-                    return
-            except (PasswordHashInvalid, PasswordHashInvalidError):
-                return await two_step_msg.reply(
-                    "» Kata sandi yang Anda kirimkan salah.\n\nSilakan mulai membuat sesi lagi.",
-                    quote=True,
-                    reply_markup=InlineKeyboardMarkup(gen_button),
-                )
-    elif telethon:
-        try:
-            await client.start(bot_token=phone_number)
-        except Exception as err:
-            return await msg.reply(err)
-            
-        try:
-            await client.sign_in_bot(phone_number)
-        except Exception as err:
-            return await msg.reply(err)
+async def gen_session(
+    message, user_id: int, telethon: bool = False, old_pyro: bool = False
+):
     if telethon:
-        string_session = client.session.save()
+        ty = f"ᴛᴇʟᴇᴛʜᴏɴ"
+    elif old_pyro:
+        ty = f"ᴩʏʀᴏɢʀᴀᴍ v1"
     else:
-        string_session = await client.export_session_string()
-    text = f"**Ini adalah {ty} Sesi String Anda** \n\n`{string_session}` \n\n**Dihasilkan Oleh :** @{bot.me.username}\n• **Catatan :** Don jangan share ke siapapun Bahkan ke pacar kalian sendiri hehe"
+        ty = f"ᴩʏʀᴏɢʀᴀᴍ v2"
+
+    await message.reply_text(f"» ʟᴀɢɪ ᴄᴏʙᴀ {ty} ɴɢᴀᴍʙɪʟ sᴛʀɪɴɢ ᴀɴᴅᴀ...")
+
     try:
-        if not is_bot:
-            await client.send_message("me", text)
-            await client(JoinChannelRequest("@Arabc0de"))
-            await client(JoinChannelRequest("@Cehaarab"))
-            await client.join_chat("SiArab_Support")
+        api_id = await dispatcher.bot.ask(
+            identifier=(message.chat.id, user_id, None),
+            text="» ᴍᴀsᴜᴋɪɴ ᴀᴘɪ ɪᴅ ʟᴜ ʙᴜʀᴜ :",
+            filters=filters.text,
+            timeout=300,
+        )
+    except ListenerTimeout:
+        return await update.effective_message.reply_text("» ʏᴀʜ ᴋᴇʟᴀᴍᴀᴀɴ ᴋᴇʙᴜʀᴜ 𝟻 ᴍᴇɴɪᴛ ᴋᴀɴ.\n\nᴋʟɪᴋ /start ʙᴜᴀᴛ ᴀᴍʙɪʟ sᴛʀɪɴɢ ʙᴀʀᴜ.",
+            reply_markup=retry_key,
+        )
+
+    if await cancelled(api_id):
+        return
+
+    try:
+        api_id = int(api_id.text)
+    except ValueError:
+        return await update.effective_message.reply_text("» ᴀᴘɪ ɪᴅ ʟᴜ sᴀʟᴀʜ ʙʟᴏɢ.\n\nᴋʟɪᴋ /start ʙᴜᴀᴛ ᴀᴍʙɪʟ sᴛʀɪɴɢ ʙᴀʀᴜ.",
+            reply_markup=retry_key,
+        )
+
+    try:
+        api_hash = await dispatcher.bot.ask(
+            identifier=(message.chat.id, user_id, None),
+            text="» ᴍᴀsᴜᴋɪɴ ᴀᴘɪ ʜᴀsʜ ʟᴜ ʙᴜʀᴜ :",
+            filters=filters.text,
+            timeout=300,
+        )
+    except ListenerTimeout:
+        return await update.effective_message.reply_text("» ʏᴀʜ ᴋᴇʟᴀᴍᴀᴀɴ ᴋᴇʙᴜʀᴜ 𝟻 ᴍᴇɴɪᴛ ᴋᴀɴ.\n\nᴋʟɪᴋ /start ʙᴜᴀᴛ ᴀᴍʙɪʟ sᴛʀɪɴɢ ʙᴀʀᴜ.",
+            reply_markup=retry_key,
+        )
+
+    if await cancelled(api_hash):
+        return
+
+    api_hash = api_hash.text
+
+    if len(api_hash) < 30:
+        return await update.effective_message.reply_text("» ᴀᴘɪ ʜᴀsʜ ʟᴜ sᴀʟᴀʜ ʙʟᴏɢ.\n\nᴋʟɪᴋ /start ʙᴜᴀᴛ ᴀᴍʙɪʟ sᴛʀɪɴɢ ʙᴀʀᴜ.",
+            reply_markup=retry_key,
+        )
+
+    try:
+        phone_number = await dispatcher.bot.ask(
+            identifier=(message.chat.id, user_id, None),
+            text="» ᴍᴀsᴜᴋɪɴ ɴᴏᴍᴏʀ ᴛᴇʟᴇ ʟᴜ ʙᴜʀᴜ :",
+            filters=filters.text,
+            timeout=300,
+        )
+    except ListenerTimeout:
+        return await update.effective_message.reply_text("» ʏᴀʜ ᴋᴇʟᴀᴍᴀᴀɴ ᴋᴇʙᴜʀᴜ 𝟻 ᴍᴇɴɪᴛ ᴋᴀɴ.\n\nᴋʟɪᴋ /start ʙᴜᴀᴛ ᴀᴍʙɪʟ sᴛʀɪɴɢ ʙᴀʀᴜ.",
+            reply_markup=retry_key,
+        )
+
+    if await cancelled(phone_number):
+        return
+    phone_number = phone_number.text
+
+    await update.effective_message.reply_text("» ʟᴀɢɪ ɴʏᴏʙᴀ ɴɢɪʀɪᴍɪɴ ᴏᴛᴘ ᴋᴇ ᴀᴋᴜɴ ʟᴜ...")
+    if telethon:
+        client = TelegramClient(StringSession(), api_id, api_hash)
+    elif old_pyro:
+        client = Client1(":memory:", api_id=api_id, api_hash=api_hash)
+    else:
+        client = Client(name="pbot", api_id=api_id, api_hash=api_hash, in_memory=True)
+    await client.connect()
+
+    try:
+        if telethon:
+            code = await client.send_code_request(phone_number)
         else:
-            await bot.send_message(msg.chat.id, text)
+            code = await client.send_code(phone_number)
+        await asyncio.sleep(1)
+
+    except FloodWait as f:
+        return await update.effective_message.reply_text("» ɢᴀɢᴀʟ ɴɢɪʀɪᴍ ᴋᴏᴅᴇ ᴏᴛᴘ ᴋᴇ ᴀᴋᴜɴ ʟᴜ.\n\nʜᴀʀᴀᴘ ᴛᴜɴɢɢᴜ {f.value or f.x} sᴇᴄᴏɴᴅs ᴅᴀɴ ᴄᴏʙᴀ ʟᴀɢɪ.",
+            reply_markup=retry_key,
+        )
+    except (ApiIdInvalid, ApiIdInvalidError, ApiIdInvalid1):
+        return await update.effective_message.reply_text("» ᴀᴘɪ ʜᴀsʜ ᴀᴛᴀᴜ ᴀᴘɪ ɪᴅ ʟᴜ sᴀʟᴀʜ ʙʟᴏɢ.\n\nᴋʟɪᴋ /start ʙᴜᴀᴛ ᴀᴍʙɪʟ sᴛʀɪɴɢ ʙᴀʀᴜ.",
+            reply_markup=retry_key,
+        )
+    except (PhoneNumberInvalid, PhoneNumberInvalidError, PhoneNumberInvalid1):
+        return await update.effective_message.reply_text("» ᴍᴀsᴜᴋɪɴ ɴᴏᴍᴏʀ ᴛᴇʟᴇ sᴀʟᴀʜ ʙʟᴏɢ ʟᴜ\n\nᴋʟɪᴋ /start ʙᴜᴀᴛ ᴀᴍʙɪʟ sᴛʀɪɴɢ ʙᴀʀᴜ.",
+            reply_markup=retry_key,
+        )
+
+    try:
+        otp = await dispatcher.bot.ask(
+            identifier=(message.chat.id, user_id, None),
+            text=f"ᴍᴀsᴜᴋɪɴ ᴋᴏᴅᴇ ᴏᴛᴘ ʟᴜ ᴅᴀʀɪ ɴᴏᴍᴏʀ {phone_number}.\n\nᴋᴀʟᴏ ᴋᴏᴅᴇ ᴏᴛᴘɴʏᴀ <code>12345</code>, ᴛᴏʟᴏɴɢ ᴋɪʀɪᴍᴋᴀɴ sᴇᴘᴇʀᴛɪ ɪɴɪ <code>1 2 3 4 5.</code>",
+            filters=filters.text,
+            timeout=600,
+        )
+        if await cancelled(otp):
+            return
+    except ListenerTimeout:
+        return await update.effective_message.reply_text("» ʏᴀʜ ᴋᴇʟᴀᴍᴀᴀɴ ᴋᴇʙᴜʀᴜ 10 ᴍᴇɴɪᴛ ᴋᴀɴ.\n\nᴋʟɪᴋ /start ʙᴜᴀᴛ ᴀᴍʙɪʟ sᴛʀɪɴɢ ʙᴀʀᴜ.",
+            reply_markup=retry_key,
+        )
+
+    otp = otp.text.replace(" ", "")
+    try:
+        if telethon:
+            await client.sign_in(phone_number, otp, password=None)
+        else:
+            await client.sign_in(phone_number, code.phone_code_hash, otp)
+    except (PhoneCodeInvalid, PhoneCodeInvalidError, PhoneCodeInvalid1):
+        return await update.effective_message.reply_text("» <b>ᴋᴏᴅᴇ ᴏᴛᴘ ʏɢ ʟᴜ ᴍᴀsᴜᴋɪɴ sᴀʟᴀʜ.</b>\n\nᴋʟɪᴋ /start ʙᴜᴀᴛ ᴀᴍʙɪʟ sᴛʀɪɴɢ ʙᴀʀᴜ.",
+            reply_markup=retry_key,
+        )
+    except (PhoneCodeExpired, PhoneCodeExpiredError, PhoneCodeExpired1):
+        return await update.effective_message.reply_text("» <b>ᴋᴏᴅᴇ ᴏᴛᴘ ʏɢ ʟᴜ ᴍᴀsᴜᴋɪɴ ᴇxᴘɪʀᴇᴅ.</b>\n\nᴋʟɪᴋ /start ʙᴜᴀᴛ ᴀᴍʙɪʟ sᴛʀɪɴɢ ʙᴀʀᴜ.",
+            reply_markup=retry_key,
+        )
+    except (SessionPasswordNeeded, SessionPasswordNeededError, SessionPasswordNeeded1):
+        try:
+            pwd = await dispatcher.bot.ask(
+                identifier=(message.chat.id, user_id, None),
+                text="» ᴍᴀsᴜᴋɪɴ ᴘᴡ ᴠᴇʀɪғ 𝟸 ʟᴀɴɢᴋᴀʜ ʟᴜ :",
+                filters=filters.text,
+                timeout=300,
+            )
+        except ListenerTimeout:
+            return update.effective_message.reply_text("» ʏᴀʜ ᴋᴇʟᴀᴍᴀᴀɴ ᴋᴇʙᴜʀᴜ 𝟻 ᴍᴇɴɪᴛ ᴋᴀɴ.\n\nᴋʟɪᴋ /start ʙᴜᴀᴛ ᴀᴍʙɪʟ sᴛʀɪɴɢ ʙᴀʀᴜ.",
+                reply_markup=retry_key,
+            )
+
+        if await cancelled(pwd):
+            return
+        pwd = pwd.text
+
+        try:
+            if telethon:
+                await client.sign_in(password=pwd)
+            else:
+                await client.check_password(password=pwd)
+        except (PasswordHashInvalid, PasswordHashInvalidError, PasswordHashInvalid1):
+            return await update.effective_message.reply_text("» ᴘᴡ ᴠᴇʀɪғ 𝟸 ʟᴀɴɢᴋᴀʜ ʟᴜ sᴀʟᴀʜ.\n\nᴋʟɪᴋ /start ʙᴜᴀᴛ ᴀᴍʙɪʟ sᴛʀɪɴɢ ʙᴀʀᴜ.",
+                reply_markup=retry_key,
+            )
+
+    except Exception as ex:
+        return await update.effective_message.reply_text(user_id, f"ᴇʀʀᴏʀ : <code>{str(ex)}</code>")
+
+    try:
+        txt = "ɴɪʜ {0} sᴛʀɪɴɢ sᴇssɪᴏɴ ʟᴜ\n\n<code>{1}</code>\n\nᴀ sᴛʀɪɴɢ ɢᴇɴᴇʀᴀᴛᴏʀ ʙᴏᴛ ʙʏ <a href={2}>sɪ ᴧꝛᴧʙ</a>\n☠ <b>ɴᴏᴛᴇ :</b> Jᴀɴɢᴀɴ ʟᴜ sᴇʙᴀʀɪɴ ʙᴜᴀᴛ ᴘɪɴJᴏʟ."
+        if telethon:
+            string_session = client.session.save()
+            await client.send_message(
+                "me",
+                txt.format(ty, string_session, SUPPORT_CHAT),
+                link_preview=False,
+                parse_mode="html",
+            )
             await client(JoinChannelRequest("@Arabc0de"))
             await client(JoinChannelRequest("@Cehaarab"))
+        else:
+            string_session = await client.export_session_string()
+            await client.send_message(
+                "me",
+                txt.format(ty, string_session, SUPPORT_CHAT),
+                disable_web_page_preview=True,
+            )
             await client.join_chat("SiArab_Support")
     except KeyError:
         pass
-    await client.disconnect()
-    await bot.send_message(
-        msg.chat.id,
-        f'» Berhasil membuat file Anda {"Telethon" if telethon else "Pyrogram"} Sesi String.\n\nSilakan periksa pesan tersimpan  kalian yang banyak aib nya untuk mendapatkannya! \n\n**A String Generator bot by ** @Dhilnihnge',
-    )
+    try:
+        await client.disconnect()
+        await update.effective_message.reply_text("ɴɪʜ sᴛʀɪɴɢ ʟᴜ ᴜᴅᴀʜ Jᴀᴅɪ {ty} sᴛʀɪɴɢ sᴇssɪᴏɴ.\n\nᴄᴇᴋ ᴘᴇsᴀɴ ᴛᴇʀsɪᴍᴘᴀɴ ʟᴜ ʏᴀɴɢ ʙᴀɴʏᴀᴋ ʙᴏᴋᴇᴘɴʏᴀ.\n\nᴀ sᴛʀɪɴɢ ɢᴇɴᴇʀᴀᴛᴏʀ ʙᴏᴛ ʙʏ <a href={SUPPORT_CHAT}>sɪ ᴧꝛᴧʙ</a>.",
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(
+                            text="ᴘᴇsᴀɴ ᴛᴇʀsɪᴍᴘᴀɴ ʟᴜ",
+                            url=f"tg://openmessage?user_id={user_id}",
+                        )
+                    ]
+                ]
+            ),
+            disable_web_page_preview=True,
+        )
+    except:
+        pass
 
 
-
-__mod_name__ = "Gen String"
-
-__help__ = """
-Untuk Mengambil String Session PyrogramV2 & Telethon
-
- ♜ /genstring*:* Untuk Mengambil String.
-
-
-"""
+async def cancelled(message):
+    if "/cancel" in message.text:
+        await message.reply_text(
+            "» ɴɢᴇʙᴀᴛᴀʟɪɴ ᴘʀᴏsᴇs ɴɢᴀᴍʙɪʟ sᴛʀɪɴɢ ʟᴜ.", reply_markup=retry_key
+        )
+        return True
+    elif "/restart" in message.text:
+        await message.reply_text(
+            "» sᴜᴋsᴇs ɴɢᴇʀᴇsᴛᴀʀᴛ ʙᴏᴛ.", reply_markup=retry_key
+        )
+        return True
+    elif message.text.startswith("/"):
+        await message.reply_text(
+            "» ᴄᴀɴᴄᴇʟʟᴇᴅ ᴛʜᴇ ᴏɴɢᴏɪɴɢ sᴛʀɪɴɢ ɢᴇɴᴇʀᴀᴛɪᴏɴ ᴩʀᴏᴄᴇss.", reply_markup=retry_key
+        )
+        return True
+    else:
+        return False
