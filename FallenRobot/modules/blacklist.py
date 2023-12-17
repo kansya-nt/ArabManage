@@ -224,7 +224,6 @@ def blacklist_mode(update, context):
     chat = update.effective_chat
     user = update.effective_user
     msg = update.effective_message
-    reply_msg = update.effective.reply_to_message
     args = context.args
 
     conn = connected(context.bot, update, chat, user.id, need_admin=True)
@@ -242,7 +241,6 @@ def blacklist_mode(update, context):
         chat = update.effective_chat
         chat_id = update.effective_chat.id
         chat_name = update.effective_message.chat.title
-        reply_msg = update.effective.reply_to_message
 	    
     if args:
         if args[0].lower() in ["off", "nothing", "no"]:
