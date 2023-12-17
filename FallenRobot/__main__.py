@@ -411,9 +411,9 @@ Info Selengkapnya Bisa Contact Saya. [ᴅʜɪʟ ᴧꝛᴧʙ](https://t.me/Dhilni
                 [
                     InlineKeyboardButton(text="Kembali", callback_data="Arab_back"),
                 ],
-             )
                 ]
     )
+                    )
 
 elif query.data == "Arab_Ubot":
         query.message.edit_text(
