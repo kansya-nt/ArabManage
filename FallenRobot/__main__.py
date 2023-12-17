@@ -445,13 +445,6 @@ def Arab_string_callback(update, context):
     if query.data == "Arab_string":
         query.message.edit_text(
             text="<b>Jika Anda Ingin Menambil String Pyrogram / Telethon Anda Bisa Mengetikan /genstring di bot ini.</b>")
-            parse_mode=ParseMode.MARKDOWN,
-            disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(
-                [
-                    InlineKeyboardButton(text="˹ᴅʜɪʟ sɪ ᴧꝛᴧʙ˼", url=f"tg://user?id={OWNER_ID}"),
-                ],
-            )
         
 def Fallen_about_callback(update: Update, context: CallbackContext):
     query = update.callback_query
