@@ -82,22 +82,26 @@ sᴀʏᴀ {} ʙᴏᴛ ᴍᴜsɪᴄ ᴘʟᴜs ᴍᴀɴᴀɢᴇ ʙᴏᴛ
 """
 
 buttons = [
+     [
+        InlineKeyboardButton(text="Ambil String 📩", callback_data="Arab_String"),
+    ],
+    [
+        InlineKeyboardButton(text="Commands ⁉️", callback_data="help_back"),
+        InlineKeyboardButton(text="Jajanan Tele 💈", callback_data="source_"),
+    ],
+    [
+        InlineKeyboardButton(text="Channel 📬", url=f"https://t.me/Cehaarab"),
+        InlineKeyboardButton(text="Support 📬", url=f"https://t.me/{SUPPORT_CHAT}"),
+    ],
+    [
+        InlineKeyboardButton(text=" Dev 👑", url=f"tg://user?id={OWNER_ID}"),
+        InlineKeyboardButton(text="About ⚙️", callback_data="fallen_"),
+    ],
     [
         InlineKeyboardButton(
-            text="ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ",
+            text="➕ Tambahin ke Group Kalean ➕",
             url=f"https://t.me/{BOT_USERNAME}?startgroup=true",
         ),
-    ],
-    [
-        InlineKeyboardButton(text="Help & Commands", callback_data="help_back"),
-    ],
-    [
-        InlineKeyboardButton(text="About", callback_data="fallen_"),
-        InlineKeyboardButton(text="Support", url=f"https://t.me/{SUPPORT_CHAT}"),
-    ],
-    [
-        InlineKeyboardButton(text=" Dev", url=f"tg://user?id={OWNER_ID}"),
-        InlineKeyboardButton(text="Jasa Bot", callback_data="source_"),
     ],
 ]
 
@@ -342,6 +346,111 @@ def help_button(update, context):
         pass
 
 
+def Arab_Store_callback(update, context):
+    query = update.callback_query
+    if query.data == "Arab_":
+        query.message.edit_text(
+            text="<b>Hiii mek\nDibawah ini beberapa jasa bot dan jajanan telegram dari [SI ARAB STORE](https://t.me/Arabc0de)</b>"
+            "\nSilahkan Klik Button Di Bawah. ",
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(
+                [
+                 [
+                    InlineKeyboardButton(text="ᴅʜɪʟ sɪ ᴧꝛᴧʙ", url=f"tg://user?id={OWNER_ID}"),
+                 ],
+                 [
+                    InlineKeyboardButton(text="Ubot Premium", callback_data="Arab_Ubot"),
+                    InlineKeyboardButton(text="Bot Telegram", callback_data="Arab_Tele"),
+                 ],
+                 [
+                    InlineKeyboardButton(text="«", callback_data="Arab_back"),
+                 ]
+                ]
+            ),
+        )
+    elif query.data == "Arab_back":
+        first_name = update.effective_user.first_name
+        uptime = get_readable_time((time.time() - StartTime))
+        query.message.edit_text(
+                PM_START_TEXT.format(
+                    escape_markdown(first_name),
+                    BOT_NAME,
+                    escape_markdown(uptime),
+                    sql.num_users(),
+                    sql.num_chats()),
+                reply_markup=InlineKeyboardMarkup(buttons),
+                parse_mode=ParseMode.MARKDOWN,
+                timeout=60,
+                disable_web_page_preview=False,
+        )
+
+    elif query.data == "Arab_Tele":
+        query.message.edit_text(
+            text=f"""
+Jasa Deploy Bot Telegram :
+
+• Userbot Gcast/Delayspam -> Rp.25K/bulan
+• Fsub/File Share/Bot Asupan -> Rp.30k/bulan(nambah button 10k)
+• Bot Musik Ram 4GB -> 100k/bulan
+• Bot Musik Ram 8GB -> 150k/bulan
+• Bot Manage -> 80k/bulan
+
+Info Selengkapnya Bisa Contact Saya. [ᴅʜɪʟ ᴧꝛᴧʙ](https://t.me/Dhilnihnge)
+""",
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(
+[
+                [
+                    InlineKeyboardButton(text="˹ᴅʜɪʟ sɪ ᴧꝛᴧʙ˼", url=f"tg://user?id={OWNER_ID}"),
+                ],
+                [
+                    InlineKeyboardButton(text="Ubot Prem", callback_data="Arab_Ubot"),
+                ],
+                [
+                    InlineKeyboardButton(text="Kembali", callback_data="Arab_back"),
+                ],
+             )
+    )
+
+elif query.data == "Arab_Ubot":
+        query.message.edit_text(
+            text=f"""
+Ubot Premium adalah userbot simple yang mmudahkan kalian tanpa harus melewati proses deploy yg rumit & dengan modul yang lebih keren serta full emoji premium jika akun anda premium
+
+Untuk List Userbot Premium SI ARAB STORE bisa kalian cek list di bawah ini :
+            """,
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    InlineKeyboardButton(text="˹ᴅʜɪʟ sɪ ᴧꝛᴧʙ˼", url=f"tg://user?id={OWNER_ID}"),
+                ],
+                [
+                    InlineKeyboardButton(text="Ubot Spesial II", url=f"https://t.me/Spesial02Ubot"),
+                    InlineKeyboardButton(text="Ubot Spesial III", url=f"https://t.me/Spesial03Ubot"),
+                    InlineKeyboardButton(text="Ubot Spesial IV", url=f"https://t.me/Spesial04Ubot"),
+                ],
+                [
+                    InlineKeyboardButton(text="Ubot Ultra I", url=f"https://t.me/ArabUltraUbot"),
+                    InlineKeyboardButton(text="Ubot Ultra II", url=f"https://t.me/Ultra02Ubot"),
+                    InlineKeyboardButton(text="Ubot Ultra III", url=f"https://t.me/Ultra03Ubot"),
+                ],
+                [
+                    InlineKeyboardButton(text="Kembali", callback_data="Arab_back"),
+                ],
+             )
+    )
+
+def Arab_string_callback(update, context):
+    query = update.callback_query
+    if query.data == "Arab_string":
+        query.message.edit_text(
+            text="<b>Jika Anda Ingin Menambil String Pyrogram / Telethon Anda Bisa Mengetikan /genstring di bot ini.</b>"
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+        
 def Fallen_about_callback(update: Update, context: CallbackContext):
     query = update.callback_query
     if query.data == "fallen_":
@@ -478,6 +587,8 @@ parse_mode=ParseMode.MARKDOWN,
                 ],
             ),
         )
+
+
         
                 
 def get_help(update: Update, context: CallbackContext):
@@ -763,6 +874,12 @@ def main():
     source_callback_handler = CallbackQueryHandler(
         Source_about_callback, pattern=r"source_", run_async=True
     )
+    store_callback_handler = CallbackQueryHandler(
+        Arab_Store_callback, pattern=r"Arab_", run_async=True
+    )
+    string_callback_handler = CallbackQueryHandler(
+        Arab_string_callback, pattern=r"Arab_String", run_async=True
+    )
 
     migrate_handler = MessageHandler(Filters.status_update.migrate, migrate_chats)
 
@@ -774,6 +891,8 @@ def main():
     dispatcher.add_handler(help_callback_handler)
     dispatcher.add_handler(settings_callback_handler)
     dispatcher.add_handler(migrate_handler)
+    dispatcher.add_handler(store_callback_handler)
+    dispatcher.add_handler(string_callback_handler)
 
     dispatcher.add_error_handler(error_callback)
 
