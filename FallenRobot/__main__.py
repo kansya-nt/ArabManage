@@ -360,7 +360,7 @@ def Arab_Store_callback(update, context):
                     InlineKeyboardButton(text="ᴅʜɪʟ sɪ ᴧꝛᴧʙ", url=f"tg://user?id={OWNER_ID}"),
                  ],
                  [
-                    InlineKeyboardButton(text="Ubot Premium", callback_data="Arab_bot"),
+                    InlineKeyboardButton(text="Ubot Premium", callback_data="Arab_sup"),
                     InlineKeyboardButton(text="Bot Telegram", callback_data="Arab_Tele"),
                  ],
                  [
@@ -406,7 +406,7 @@ Info Selengkapnya Bisa Contact Saya. [ᴅʜɪʟ ᴧꝛᴧʙ](https://t.me/Dhilni
                     InlineKeyboardButton(text="˹ᴅʜɪʟ sɪ ᴧꝛᴧʙ˼", url=f"tg://user?id={OWNER_ID}"),
                 ],
                 [
-                    InlineKeyboardButton(text="Ubot Prem", callback_data="Arab_bot"),
+                    InlineKeyboardButton(text="Ubot Prem", callback_data="Arab_sup"),
                 ],
                 [
                     InlineKeyboardButton(text="Kembali", callback_data="Arab_back"),
@@ -414,8 +414,7 @@ Info Selengkapnya Bisa Contact Saya. [ᴅʜɪʟ ᴧꝛᴧʙ](https://t.me/Dhilni
                 ]
     )
                     )
-
-elif query.data == "Arab_bot":
+    elif query.data == "Arab_sup":
         query.message.edit_text(
             text=f"Ubot Premium adalah userbot simple yang mmudahkan kalian tanpa harus melewati proses deploy yg rumit & dengan modul yang lebih keren serta full emoji premium jika akun anda premium"
 "Untuk List Userbot Premium SI ARAB STORE bisa kalian cek list di bawah ini :",
