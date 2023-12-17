@@ -36,8 +36,8 @@ from FallenRobot import SUPPORT_CHAT
 keyboard = InlineKeyboardMarkup(
     [
         [InlineKeyboardButton(text="ʙᴜᴀᴛ sᴛʀɪɴɢ", callback_data="gensession")],
+    ]
         )
-
 gen_key = InlineKeyboardMarkup(
     [
         [
