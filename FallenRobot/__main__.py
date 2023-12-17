@@ -401,7 +401,7 @@ Info Selengkapnya Bisa Contact Saya. [ᴅʜɪʟ ᴧꝛᴧʙ](https://t.me/Dhilni
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
-[
+                [
                 [
                     InlineKeyboardButton(text="˹ᴅʜɪʟ sɪ ᴧꝛᴧʙ˼", url=f"tg://user?id={OWNER_ID}"),
                 ],
@@ -412,6 +412,7 @@ Info Selengkapnya Bisa Contact Saya. [ᴅʜɪʟ ᴧꝛᴧʙ](https://t.me/Dhilni
                     InlineKeyboardButton(text="Kembali", callback_data="Arab_back"),
                 ],
              )
+                ]
     )
 
 elif query.data == "Arab_Ubot":
