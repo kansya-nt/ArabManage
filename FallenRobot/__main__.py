@@ -444,7 +444,7 @@ def Arab_string_callback(update, context):
     query = update.callback_query
     if query.data == "Arab_string":
         query.message.edit_text(
-            text="<b>Jika Anda Ingin Menambil String Pyrogram / Telethon Anda Bisa Mengetikan /genstring di bot ini.</b>"
+            text="<b>Jika Anda Ingin Menambil String Pyrogram / Telethon Anda Bisa Mengetikan /genstring di bot ini.</b>")
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
         
