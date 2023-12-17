@@ -345,11 +345,10 @@ def help_button(update, context):
     except BadRequest:
         pass
 
-
-def Arab_Store_callback(update, context):
-    query = update.callback_query
-    if query.data == "Arab_":
-        query.message.edit_text(
+@app.on_callback_query(filters.regex("botprem"))
+async def botprem(self: Client, ctx: Message):
+    await app.send_message(
+        ctx.message.edit_text.(
             text="<b>Hiii mek\nDibawah ini beberapa jasa bot dan jajanan telegram dari [SI ARAB STORE](https://t.me/Arabc0de)</b>"
             "\nSilahkan Klik Button Di Bawah. ",
             parse_mode=ParseMode.MARKDOWN,
