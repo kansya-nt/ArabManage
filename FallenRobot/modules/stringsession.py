@@ -54,7 +54,7 @@ retry_key = InlineKeyboardMarkup(
 
 
 
-@pbot.on_callback_query(
+@Anony.on_callback_query(
     filters.regex(pattern=r"^(gensession|pyrogram|pyrogram1|telethon)$")
 )
 async def cb_choose(_, cq: CallbackQuery):
