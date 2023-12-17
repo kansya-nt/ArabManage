@@ -417,11 +417,8 @@ Info Selengkapnya Bisa Contact Saya. [ᴅʜɪʟ ᴧꝛᴧʙ](https://t.me/Dhilni
 
 elif query.data == "Arab_bot":
         query.message.edit_text(
-            text=f"""
-Ubot Premium adalah userbot simple yang mmudahkan kalian tanpa harus melewati proses deploy yg rumit & dengan modul yang lebih keren serta full emoji premium jika akun anda premium
-
-Untuk List Userbot Premium SI ARAB STORE bisa kalian cek list di bawah ini :
-            """,
+            text=f"Ubot Premium adalah userbot simple yang mmudahkan kalian tanpa harus melewati proses deploy yg rumit & dengan modul yang lebih keren serta full emoji premium jika akun anda premium"
+"Untuk List Userbot Premium SI ARAB STORE bisa kalian cek list di bawah ini :",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
