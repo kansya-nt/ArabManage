@@ -135,4 +135,15 @@ Info Selengkapnya Bisa Contact Saya. [ᴅʜɪʟ ᴧꝛᴧʙ](https://t.me/Dhilni
         ),
     )
 
+@pbot.on_message(filters.command(["Str_Gen"]))
+async def Str_Gen(_, message: Message):
+    await message.reply_photo(
+        photo=START_IMG,
+        caption=f"""**Hai Mek {message.from_user.mention},
+
+Jika Kalian Ingin Ngambil String Pyrogram, Pyrogram v2, Telethon Bisa Ketikan /genstring.**
+""",
+    )
+
+
 __mod_name__ = "Repo"
