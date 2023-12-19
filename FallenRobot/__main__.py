@@ -769,12 +769,6 @@ def main():
     source_callback_handler = CallbackQueryHandler(
         Source_about_callback, pattern=r"source_", run_async=True
     )
-    store_callback_handler = CallbackQueryHandler(
-        Arab_Store_callback, pattern=r"Arab_", run_async=True
-    )
-    string_callback_handler = CallbackQueryHandler(
-        Arab_string_callback, pattern=r"Arab_String", run_async=True
-    )
 
     migrate_handler = MessageHandler(Filters.status_update.migrate, migrate_chats)
 
@@ -786,8 +780,6 @@ def main():
     dispatcher.add_handler(help_callback_handler)
     dispatcher.add_handler(settings_callback_handler)
     dispatcher.add_handler(migrate_handler)
-    dispatcher.add_handler(store_callback_handler)
-    dispatcher.add_handler(string_callback_handler)
 
     dispatcher.add_error_handler(error_callback)
 
