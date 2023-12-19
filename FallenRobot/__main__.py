@@ -83,7 +83,7 @@ sᴀʏᴀ {} ʙᴏᴛ ᴍᴜsɪᴄ ᴘʟᴜs ᴍᴀɴᴀɢᴇ ʙᴏᴛ
 
 buttons = [
      [
-        InlineKeyboardButton(text="Ambil String 📩", callback_data="Str_Gen"),
+        InlineKeyboardButton(text="Ambil String 📩", callback_data="Alive"),
     ],
     [
         InlineKeyboardButton(text="Commands ⁉️", callback_data="help_back"),
