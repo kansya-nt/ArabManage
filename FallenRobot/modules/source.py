@@ -49,7 +49,7 @@ Silahkan Klik Button Di Bawah.**
             [
                 [
                     InlineKeyboardButton("ᴅʜɪʟ sɪ ᴧꝛᴧʙ", user_id=OWNER_ID),
-                ]
+                ],
                 [
                     InlineKeyboardButton(
                         text="Ubot Premium",
@@ -59,7 +59,7 @@ Silahkan Klik Button Di Bawah.**
                         text="Bot Telegram",
                         callback_data="Bot_Tele",
                     ),
-                ]
+                ],
             ]
         ),
     )
@@ -77,7 +77,7 @@ Untuk List Userbot Premium SI ARAB STORE bisa kalian cek list di bawah ini :**
             [
                 [
                     InlineKeyboardButton("ᴅʜɪʟ sɪ ᴧꝛᴧʙ", user_id=OWNER_ID),
-                ]
+                ],
                 [
                     InlineKeyboardButton(text="Ubot Spesial II", url="https://t.me/Spesial02Ubot",
                     ),
@@ -85,12 +85,12 @@ Untuk List Userbot Premium SI ARAB STORE bisa kalian cek list di bawah ini :**
                     ),
                     InlineKeyboardButton(text="Ubot Spesial IV", url="https://t.me/Spesial04Ubot",
                     ),
-                ]
+                ],
                 [
                     InlineKeyboardButton(text="Ubot Ultra I", url="https://t.me/ArabUltraUbot"),
                     InlineKeyboardButton(text="Ubot Ultra II", url="https://t.me/Ultra02Ubot"),
                     InlineKeyboardButton(text="Ubot Ultra III", url="https://t.me/Ultra03Ubot"),
-                ]
+                ],
                 [
                     InlineKeyboardButton(text="Kembali", callback_data="Store_Tele"),
                 ],
@@ -118,19 +118,19 @@ Info Selengkapnya Bisa Contact Saya. [ᴅʜɪʟ ᴧꝛᴧʙ](https://t.me/Dhilni
             [
                 [
                     InlineKeyboardButton("ᴅʜɪʟ sɪ ᴧꝛᴧʙ", user_id=OWNER_ID),
-                ]
+                ],
                 [
                     InlineKeyboardButton(
                         text="Ubot Premium",
                         callback_data="Ubot_Prem",
                     ),
-                ]
+                ],
                 [
                     InlineKeyboardButton(
                         text="Kembali",
                         callback_data="Store_Tele",
                     ),
-                ]
+                ],
             ]
         ),
     )
