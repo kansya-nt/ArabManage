@@ -83,11 +83,11 @@ sᴀʏᴀ {} ʙᴏᴛ ᴍᴜsɪᴄ ᴘʟᴜs ᴍᴀɴᴀɢᴇ ʙᴏᴛ
 
 buttons = [
      [
-        InlineKeyboardButton(text="Ambil String 📩", callback_data="Arab_String"),
+        InlineKeyboardButton(text="Ambil String 📩", callback_data="Str_Gen"),
     ],
     [
         InlineKeyboardButton(text="Commands ⁉️", callback_data="help_back"),
-        InlineKeyboardButton(text="Jajanan Tele 💈", callback_data="source_"),
+        InlineKeyboardButton(text="Jajanan Tele 💈", callback_data="Store_Tele"),
     ],
     [
         InlineKeyboardButton(text="Channel 📬", url=f"https://t.me/Cehaarab"),
