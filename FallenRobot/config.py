@@ -13,14 +13,14 @@ class Config(object):
 
     EVENT_LOGS = (-1001795374467)  # Event logs channel to note down important bot level events
 
-    MONGO_DB_URI = "mongodb+srv://fadhil01:fadhil123@fadhil01.s6lkqsq.mongodb.net/?retryWrites=true&w=majority"  # Get ths value from cloud.mongodb.com
+    MONGO_DB_URI = "mongodb+srv://doadmin:9r260Iqy437zS1lA@db-mongodb-sgp1-52558-1312a8db.mongo.ondigitalocean.com/admin?tls=true&authSource=admin&replicaSet=db-mongodb-sgp1-52558"  # Get ths value from cloud.mongodb.com
 
     # Telegraph link of the image which will be shown at start command.
     START_IMG = "https://telegra.ph//file/a679b3ae99ff100437671.jpg"
 
     SUPPORT_CHAT = "SiArab_Support"  # Your Telegram support group chat username where your users will go and bother you
 
-    TOKEN = "6515197149:AAEUZdUatsvt_t1ElCqWB2qDl5wEg6Ca9DM"  # Get bot token from @BotFather on Telegram
+    TOKEN = ""  # Get bot token from @BotFather on Telegram
 
     TIME_API_KEY = "ZMOE8Q6BE25J7BEU"  # Get this value from https://timezonedb.com/api
 
