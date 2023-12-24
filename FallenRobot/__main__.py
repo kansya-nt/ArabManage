@@ -71,12 +71,12 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-*ʏᴏᴏ {}* [🤖](https://telegra.ph//file/3900ea5b3385ac7632dac.jpg)
+*ʏᴏᴏ {}* [🤖](https://graph.org/file/163b8234f53e007e8f884.jpg)
 
 sᴀʏᴀ {} ʙᴏᴛ ᴍᴜsɪᴄ ᴘʟᴜs ᴍᴀɴᴀɢᴇ ʙᴏᴛ
 ɢᴀ ᴀᴅᴀ ʏᴀɴɢ sᴘᴇsɪᴀʟ sᴀᴍᴀ ᴀᴊᴀ ᴋᴇᴋ ʙᴏᴛ ᴍᴜsɪᴄ ʟᴀᴇɴ, ᴋᴀʟᴏ ᴍᴀᴜ ᴅᴏɴᴀsɪ ᴊᴀɴɢᴀɴ ʟᴜᴘᴀ ᴋʟɪᴋ /donate ᴏᴛᴇʏ
 
-ᴅᴇᴠ: @Dhilnihnge
+ᴅᴇᴠ: @Foundermidnight
 ──────────────────
 *ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ʜᴇʟᴩ ʙᴜᴛᴛᴏɴ ᴛᴏ ɢᴇᴛ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ᴀʙᴏᴜᴛ ᴍʏ ᴍᴏᴅᴜʟᴇs ᴀɴᴅ ᴄᴏᴍᴍᴀɴᴅs.*
 """
@@ -87,14 +87,14 @@ buttons = [
     ],
     [
         InlineKeyboardButton(text="Commands ⁉️", callback_data="help_back"),
-        InlineKeyboardButton(text="Jajanan Tele 💈", callback_data="Store_Tele"),
+        InlineKeyboardButton(text="Founder 💈", callback_data="foundermidnight"),
     ],
     [
-        InlineKeyboardButton(text="Channel 📬", url=f"https://t.me/Cehaarab"),
-        InlineKeyboardButton(text="Support 📬", url=f"https://t.me/{SUPPORT_CHAT}"),
+        InlineKeyboardButton(text="Channel 📬", url=f"https://t.me/asupan_viral18plus"),
+        InlineKeyboardButton(text="Support 📬", url=f"https://t.me/Berlinmusic_support"),
     ],
     [
-        InlineKeyboardButton(text=" Dev 👑", url=f"tg://user?id={OWNER_ID}"),
+        InlineKeyboardButton(text=" Dev 👑", url=f"tg://user?id=6024180996),
         InlineKeyboardButton(text="About ⚙️", callback_data="fallen_"),
     ],
     [
@@ -371,7 +371,7 @@ def Fallen_about_callback(update: Update, context: CallbackContext):
                 [
                     [
                         InlineKeyboardButton(
-                            text="Support", callback_data="fallen_support"
+                            text="Support", callback_data="Berlinmusic_support"
                         ),
                         InlineKeyboardButton(
                             text="Commands", callback_data="help_back"
@@ -379,7 +379,7 @@ def Fallen_about_callback(update: Update, context: CallbackContext):
                     ],
                     [
                         InlineKeyboardButton(
-                            text="Dev", url=f"tg://user?id={OWNER_ID}"
+                            text="Dev", url=f"tg://user?id=6024180996"
                         ),
                         InlineKeyboardButton(
                             text="Jasa Bot",
@@ -401,19 +401,19 @@ def Fallen_about_callback(update: Update, context: CallbackContext):
                 [
                     [
                         InlineKeyboardButton(
-                            text="sᴜᴩᴩᴏʀᴛ", url=f"https://t.me/{SUPPORT_CHAT}"
+                            text="sᴜᴩᴩᴏʀᴛ", url=f"https://t.me/Berlinmusic_support"
                         ),
                         InlineKeyboardButton(
-                            text="ᴜᴩᴅᴀᴛᴇs", url=f"https://t.me/{SUPPORT_CHAT}"
+                            text="ᴜᴩᴅᴀᴛᴇs", url=f"https://t.me/Asupan_viral18plus"
                         ),
                     ],
                     [
                         InlineKeyboardButton(
-                            text="ᴅᴇᴠ", url=f"tg://user?id={OWNER_ID}"
+                            text="ᴅᴇᴠ", url=f"tg://user?id=6024180996"
                         ),
                         InlineKeyboardButton(
-                            text="sᴛᴏʀᴇ",
-                            url=f"https://t.me/Arabc0de",
+                            text="Asupan",
+                            url=f"https://t.me/Asupan_viral18plus",
                         ),
                     ],
                     [
